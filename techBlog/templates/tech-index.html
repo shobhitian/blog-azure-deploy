@@ -1,0 +1,251 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- Site Metas -->
+    <title>Techey Blog</title>
+    <meta name="keywords" content="{% for keyword in keywords %}{{ keyword.keywords }},{% endfor %}">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
+    
+    <!-- Design fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet"> 
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+
+    <!-- FontAwesome Icons core CSS -->
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'style.css' %}" rel="stylesheet">
+
+    <!-- Responsive styles for this template -->
+    <link href="{% static 'css/responsive.css' %}" rel="stylesheet">
+
+    <!-- Colors for this template -->
+    <link href="{% static 'css/colors.css' %}" rel="stylesheet">
+
+    <!-- Version Tech CSS for this template -->
+    <link href="{% static 'css/version/tech.css' %}" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+
+    <div id="wrapper">
+        <header class="tech-header header">
+            <div class="container-fluid">
+                <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+                    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <!-- <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'images/version/tech-logo.png' %}" alt=""></a>
+                      -->
+                    <a class="navbar-brand logo-text" href="{% url 'index' %}">Tech Logo123</a>
+
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'index' %}">Home</a>
+                            </li>
+          
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
+                            </li>
+                        </ul>
+                   
+                    </div>
+                </nav>
+            </div><!-- end container-fluid -->
+        </header><!-- end market-header -->
+
+
+
+        
+
+
+        <section class="section first-section">
+            <div class="container-fluid">
+                <div class="masonry-blog-container">
+                    <div class="masonry-blog clearfix">
+                        {% for post in posts %}
+                        <div class="masonry-box post-media">
+                            <img src="{{ post.image.url }}" alt="" class="img-fluid">
+                            <div class="shadoweffect">
+                                <div class="shadow-desc">
+                                    <div class="blog-meta">
+                                        <span class="bg-orange"><a href="{% url 'category1' %}" title="">Technology</a></span>
+                                        <h4><a href="{% url 'single_post' post.id %}" title="">{{ post.title }}</a></h4>
+                                        <small><a href="{% url 'single_post' post.id %}" title="">{{ post.pub_date }}</a></small>
+                                        <small><a href="{% url 'author' %}" title="">{{ post.author }}</a></small>
+                                    </div><!-- end meta -->
+                                </div><!-- end shadow-desc -->
+                            </div><!-- end shadow -->
+                        </div><!-- end masonry-box -->
+                        {% endfor %}
+                    </div><!-- end masonry-blog -->
+                </div><!-- end masonry-blog-container -->
+            </div><!-- end container-fluid -->
+        </section>
+
+
+
+        <style>
+            .masonry-blog-container {
+                overflow-x: auto;
+                white-space: nowrap;
+                margin-bottom: 20px; /* Add some margin for spacing */
+            }
+
+            .masonry-blog {
+                display: inline-block;
+                white-space: nowrap;
+            }
+
+            .masonry-box {
+                display: inline-block;
+                margin-right: 20px; /* Adjust margin as needed */
+            }
+
+        </style>
+
+
+
+
+
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                <div class="page-wrapper">
+                    <div class="blog-top clearfix">
+                        <h4 class="pull-left">Recent News <a href="#"><i class="fa fa-rss"></i></a></h4>
+                    </div><!-- end blog-top -->
+
+                    <div class="blog-list clearfix">
+                        {% for news in news_list %}
+                        <div class="blog-box row">
+                            <div class="col-md-4">
+                                <div class="post-media">
+                                    <a href="#" title="">
+                                        <img src="{{ news.image.url }}" alt="" class="img-fluid">
+                                        <div class="hovereffect"></div>
+                                    </a>
+                                </div><!-- end media -->
+                            </div><!-- end col -->
+
+                            <div class="blog-meta big-meta col-md-8">
+                                <h4><a href="{% url 'single_news' news.id %}" title="">{{ news.title }}</a></h4>
+                                <p>{{ news.content|slice:":240" }}{% if news.content|length > 240 %}...{% endif %}</p>
+                                <small class="firstsmall"><a class="bg-orange" href="{% url 'category1' %}" title="">Gadgets</a></small>
+                                <small><a href="{% url 'single_news' news.id %}" title="">{{ news.pub_date }}</a></small>
+                                <small><a href="{% url 'single_news' news.id %}" title="">by {{ news.author }}</a></small>
+                                <small><a href="#" title=""><i class="fa fa-eye"></i> 1114</a></small>
+                            </div><!-- end meta -->
+                        </div><!-- end blog-box -->
+                        {% endfor %}
+
+                        <hr class="invis">
+                    </div><!-- end blog-list -->
+
+                    
+                </div><!-- end page-wrapper -->
+            </div><!-- end col -->
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section>
+
+        
+        
+        
+
+
+
+
+
+
+
+
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <div class="widget">
+                            <div class="footer-text text-left">
+                                <a href="{% url 'index' %}"><img src="{% static 'images/version/tech-footer-logo.png' %}" alt="" class="img-fluid"></a>
+                                <p>Tech Blog is a technology blog, we sharing marketing, news and gadget articles.</p>
+                                <div class="social">
+                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>              
+                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter"></i></a>
+                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Instagram"><i class="fa fa-instagram"></i></a>
+                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Google Plus"><i class="fa fa-google-plus"></i></a>
+                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Pinterest"><i class="fa fa-pinterest"></i></a>
+                                </div>
+
+                                <hr class="invis">
+
+                                <div class="newsletter-widget text-left">
+                                    <form class="form-inline">
+                                        <input type="text" class="form-control" placeholder="Enter your email address">
+                                        <button type="submit" class="btn btn-primary">SUBMIT</button>
+                                    </form>
+                                </div><!-- end newsletter -->
+                            </div><!-- end footer-text -->
+                        </div><!-- end widget -->
+                    </div><!-- end col -->
+
+                    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                        <div class="widget">
+                            <h2 class="widget-title">Popular Categories</h2>
+                            <div class="link-widget">
+                                <ul>
+                                    <li><a href="#">Marketing <span>(21)</span></a></li>
+                                    <li><a href="#">SEO Service <span>(15)</span></a></li>
+                                    <li><a href="#">Digital Agency <span>(31)</span></a></li>
+                                    <li><a href="#">Make Money <span>(22)</span></a></li>
+                                    <li><a href="#">Blogging <span>(66)</span></a></li>
+                                </ul>
+                            </div><!-- end link-widget -->
+                        </div><!-- end widget -->
+                    </div><!-- end col -->
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <br>
+               
+                    </div>
+                </div>
+            </div><!-- end container -->
+        </footer><!-- end footer -->
+
+        <div class="dmtop">Scroll to Top</div>
+        
+    </div><!-- end wrapper -->
+
+    <!-- Core JavaScript
+    ================================================== -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/tether.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+
+</body>
+</html>
